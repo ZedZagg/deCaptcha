@@ -29,13 +29,16 @@ class DeCaptcha {
 		imageContainer.style.lineHeight = "0px"
 		rootElement.append(imageContainer)
 
-		for(let i = 0; i < 9; i++){		
+		for(let i = 0; i < 9; i++){
+			const imageUri = this.#getImageUri();
 			let captchaImage = document.createElement("img");
 			captchaImage.style.width = "126px";
 			captchaImage.style.height = "126px";
 			captchaImage.style.backgroundColor = "grey";
 			captchaImage.style.margin = "2px";
 			captchaImage.style.display = "inline";
+			captchaImage.style.objectFit = "cover";
+			captchaImage.src = imageUri;
 			captchaImage.style.scale = 1;
 			imageContainer.append(captchaImage);
 			captchaImage.onclick = () => {
@@ -117,5 +120,15 @@ class DeCaptcha {
 		const first = firstWordSet[Math.floor(Math.random() * firstWordSet.length)];
 		const second = secondWordSet[Math.floor(Math.random() * secondWordSet.length)];
 		return `${first} ${second}`;
+	}
+
+	#getImageUri(){
+		const imagesUris = [
+			"https://thumbnails.pcgamingwiki.com/8/8d/PTower.jpg/300px-PTower.jpg",
+			"https://upload.wikimedia.org/wikipedia/en/6/6d/Bethesda_Starfield.jpg",
+			"https://m.media-amazon.com/images/M/MV5BMTk4MDM0MDUzM15BMl5BanBnXkFtZTcwOTI4MzU1Mw@@._V1_FMjpg_UX1000_.jpg",
+			"https://i.kym-cdn.com/entries/icons/facebook/000/002/284/crab_nicholson.jpg"
+		];
+		return imagesUris[Math.floor(Math.random() * imagesUris.length)];
 	}
 }
