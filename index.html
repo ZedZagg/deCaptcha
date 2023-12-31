@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<script type="text/javascript" src="de-captcha.js"></script>
+  	<script type="text/javascript">
+  		let deCaptcha = null;
+  		function initDeCaptcha() {
+  			const anchor = document.getElementById("deCaptcha-anchor");
+  			deCaptcha = new DeCaptcha(anchor);
+  		}
+  	</script>
+  </head>
+  <body onload="initDeCaptcha()" >
+  	<h1>Test Header</h1>
+  	<div id="deCaptcha-anchor"/>
+  	<button onclick="deCaptcha.show()">show</button>
+  	<button onclick="deCaptcha.hide()">hide</button>
+  </body>
+</html>
