@@ -4,8 +4,6 @@ class DeCaptcha {
 	#rootElement;
 	
 	constructor(anchorElement) {
-		const word = "fake soul"
-
 		let rootElement = document.createElement("div");
 		rootElement.style.minWidth = "240px"
 		rootElement.style.maxWidth = "400px"
@@ -22,7 +20,7 @@ class DeCaptcha {
 		instructions.style.color = "white"
 		instructions.style.fontSize = "16px"
 		instructions.style.fontFamily = "Roboto,helvetica,arial,sans-serif"
-		instructions.innerHTML = `Select all images with <strong style="font-size: 22px; display: block">${word}</strong>`
+		instructions.innerHTML = `Select all images with <strong style="font-size: 22px; display: block">${this.#getWord()}</strong>`
 		rootElement.append(instructions)
 
 		anchorElement.append(rootElement);
@@ -50,5 +48,49 @@ class DeCaptcha {
 		anim.finished.then(() => {
 			rootEl.style.opacity = endOpacity;
 		});
+	}
+
+	#getWord(){
+		const firstWordSet = [
+			"Artificial",
+			"Fake",
+			"Forced",
+			"Cringe",
+			"Honest",
+			"Kino",
+			"Ludo",
+			"Liminal",
+			"Tranny",
+			"Goy",
+			"Zoomer",
+			"Boomer",
+			"Weeb",
+			"Based",
+			"Schizo",
+			"Grug"
+		];
+
+		const secondWordSet = [
+			"Soul",
+			"Core",
+			"Pilled",
+			"Kino",
+			"Horny",
+			"Fun",
+			"Cringe",
+			"Reddit",
+			"Slop",
+			"Nostalgia",
+			"Ludo",
+			"Humor",
+			"Shit",
+			"Cunny",
+			"FOTM",
+			"Jank"
+		];
+
+		const first = firstWordSet[Math.floor(Math.random() * firstWordSet.length)];
+		const second = secondWordSet[Math.floor(Math.random() * secondWordSet.length)];
+		return `${first} ${second}`;
 	}
 }
