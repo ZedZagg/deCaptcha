@@ -23,6 +23,31 @@ class DeCaptcha {
 		instructions.innerHTML = `Select all images with <strong style="font-size: 22px; display: block">${this.#getWord()}</strong>`
 		rootElement.append(instructions)
 
+		let imageContainer = document.createElement("div");
+		imageContainer.style.margin = "5px"
+		imageContainer.style.marginTop = "-2px"
+		imageContainer.style.lineHeight = "0px"
+		rootElement.append(imageContainer)
+
+		for(let i = 0; i < 9; i++){		
+			let captchaImage = document.createElement("img");
+			captchaImage.style.width = "126px";
+			captchaImage.style.height = "126px";
+			captchaImage.style.backgroundColor = "grey";
+			captchaImage.style.margin = "2px";
+			captchaImage.style.display = "inline";
+			captchaImage.style.scale = 1;
+			imageContainer.append(captchaImage);
+			captchaImage.onclick = () => {
+				const scale = captchaImage.style.scale;
+				const target = scale < 1 ? 1 : 0.8;
+				captchaImage.animate({scale: target}, {duration: 50, iterations: 1})
+						.finished.then(() => {
+							captchaImage.style.scale = target
+						});
+			}
+		}
+
 		anchorElement.append(rootElement);
 		this.#rootElement = rootElement;
 	}
