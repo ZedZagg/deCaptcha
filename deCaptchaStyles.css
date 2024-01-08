@@ -8,6 +8,12 @@
     scale: 1;
 }
 
+.deCaptchaImageContainer {
+    margin: 5px;
+    margin-top: -2px;
+    line-height: 0px;
+}
+
 .deCaptchaRoot {
     min-width: 240px;
     max-width: 400px;

@@ -2,6 +2,8 @@ console.log("deCaptcha loaded");
 
 class DeCaptcha {
 	#rootElement;
+	#instructionsElement;
+	#imageContainerElement;
 	
 	constructor(anchorElement) {
 		let rootElement = document.createElement("div");
@@ -9,35 +11,15 @@ class DeCaptcha {
 
 		let instructions = document.createElement("div");
 		instructions.classList.add("deCaptchaInstructions");
-		instructions.innerHTML = `Select all images with <strong style="font-size: 22px; display: block">${this.#getWord()}</strong>`
 		rootElement.append(instructions)
+		this.#instructionsElement = instructions;
+		this.#populateInstructions();
 
 		let imageContainer = document.createElement("div");
-		imageContainer.style.margin = "5px"
-		imageContainer.style.marginTop = "-2px"
-		imageContainer.style.lineHeight = "0px"
+		imageContainer.classList.add("deCaptchaImageContainer");
 		rootElement.append(imageContainer)
-
-		for(let i = 0; i < 9; i++){
-			const imageUri = this.#getImageUri();
-
-			let captchaImage = document.createElement("img");
-			captchaImage.src = imageUri;
-			captchaImage.draggable = false;
-			captchaImage.style.scale = 1;
-			captchaImage.classList.add("deCaptchaImage");
-
-			imageContainer.append(captchaImage);
-			
-			captchaImage.onclick = () => {
-				const scale = captchaImage.style.scale;
-				const target = scale < 1 ? 1 : 0.8;
-				captchaImage.animate({scale: target}, {duration: 50, iterations: 1})
-						.finished.then(() => {
-							captchaImage.style.scale = target
-						});
-			}
-		}
+		this.#imageContainerElement = imageContainer;
+		this.#populateImages();
 
 		anchorElement.append(rootElement);
 		this.#rootElement = rootElement;
@@ -53,6 +35,11 @@ class DeCaptcha {
 		this.#fadeRoot(currentOpacity, 0);
 	}
 
+	regenerate() {
+		this.#populateImages();
+		this.#populateInstructions();
+	}
+
 	#fadeRoot(startOpacity, endOpacity){
 		const rootEl = this.#rootElement;
 
@@ -64,6 +51,35 @@ class DeCaptcha {
 		anim.finished.then(() => {
 			rootEl.style.opacity = endOpacity;
 		});
+	}
+
+	#populateInstructions(){
+		this.#instructionsElement.innerHTML = `Select all images with <strong style="font-size: 22px; display: block">${this.#getWord()}</strong>`
+	}
+
+	#populateImages(){
+		this.#imageContainerElement.innerHTML = "";
+		
+		for(let i = 0; i < 9; i++){
+			const imageUri = this.#getImageUri();
+
+			let captchaImage = document.createElement("img");
+			captchaImage.src = imageUri;
+			captchaImage.draggable = false;
+			captchaImage.style.scale = 1;
+			captchaImage.classList.add("deCaptchaImage");
+			
+			captchaImage.onclick = () => {
+				const scale = captchaImage.style.scale;
+				const target = scale < 1 ? 1 : 0.8;
+				captchaImage.animate({scale: target}, {duration: 50, iterations: 1})
+						.finished.then(() => {
+							captchaImage.style.scale = target
+						});
+			}
+
+			this.#imageContainerElement.append(captchaImage);
+		}
 	}
 
 	#getWord(){
