@@ -23,6 +23,8 @@ class DeCaptcha {
 
 			let captchaImage = document.createElement("img");
 			captchaImage.src = imageUri;
+			captchaImage.draggable = false;
+			captchaImage.style.scale = 1;
 			captchaImage.classList.add("deCaptchaImage");
 
 			imageContainer.append(captchaImage);
