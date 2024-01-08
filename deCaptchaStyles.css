@@ -1,0 +1,28 @@
+.deCaptchaImage {
+    width: 126px;
+    height: 126px;
+    background-color: gray;
+    margin: 2px;
+    display: inline;
+    object-fit: cover;
+    scale: 1;
+}
+
+.deCaptchaRoot {
+    min-width: 240px;
+    max-width: 400px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
+    opacity: 0;
+}
+
+.deCaptchaInstructions {
+    height: 66px;
+    margin: 7px;
+    background-color: #1a73e8;
+    padding: 24px;
+    color: white;
+    font-size: 16px;
+    font-family: "Roboto,helvetica,arial,sans-serif";
+}

@@ -5,21 +5,10 @@ class DeCaptcha {
 	
 	constructor(anchorElement) {
 		let rootElement = document.createElement("div");
-		rootElement.style.minWidth = "240px"
-		rootElement.style.maxWidth = "400px"
-		rootElement.style.backgroundColor = "rgb(255, 255, 255)"
-		rootElement.style.border = "1px solid rgb(204, 204, 204)"
-		rootElement.style.boxShadow = "rgba(0, 0, 0, 0.2) 2px 2px 3px"
-		rootElement.style.opacity = 0
+		rootElement.classList.add("deCaptchaRoot");
 
 		let instructions = document.createElement("div");
-		instructions.style.height = "66px"
-		instructions.style.margin = "7px"
-		instructions.style.backgroundColor = "#1a73e8"
-		instructions.style.padding = "24px"
-		instructions.style.color = "white"
-		instructions.style.fontSize = "16px"
-		instructions.style.fontFamily = "Roboto,helvetica,arial,sans-serif"
+		instructions.classList.add("deCaptchaInstructions");
 		instructions.innerHTML = `Select all images with <strong style="font-size: 22px; display: block">${this.#getWord()}</strong>`
 		rootElement.append(instructions)
 
@@ -31,16 +20,13 @@ class DeCaptcha {
 
 		for(let i = 0; i < 9; i++){
 			const imageUri = this.#getImageUri();
+
 			let captchaImage = document.createElement("img");
-			captchaImage.style.width = "126px";
-			captchaImage.style.height = "126px";
-			captchaImage.style.backgroundColor = "grey";
-			captchaImage.style.margin = "2px";
-			captchaImage.style.display = "inline";
-			captchaImage.style.objectFit = "cover";
 			captchaImage.src = imageUri;
-			captchaImage.style.scale = 1;
+			captchaImage.classList.add("deCaptchaImage");
+
 			imageContainer.append(captchaImage);
+			
 			captchaImage.onclick = () => {
 				const scale = captchaImage.style.scale;
 				const target = scale < 1 ? 1 : 0.8;
